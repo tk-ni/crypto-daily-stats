@@ -1,8 +1,3 @@
-<template>
-  <div>Search Bar</div>
-  <!-- <div v-if="this.coins">GOTEM COINS</div>
-  <div v-else>NO COINS OH NO</div> -->
-</template>
 <script>
 import { getAllCoins } from "@/services/coingecko.service";
 export default {
@@ -17,8 +12,8 @@ export default {
       let coins = await getAllCoins();
       if (coins) {
         this.coins = [...coins];
-      }else{
-          this.coins = false;
+      } else {
+        this.coins = false;
       }
     },
   },
@@ -27,5 +22,12 @@ export default {
   },
 };
 </script>
+
+<template>
+  <div>Search Bar</div>
+  <!-- <div v-if="this.coins">GOTEM COINS</div>
+  <div v-else>NO COINS OH NO</div> -->
+</template>
+
 <style scoped>
 </style>

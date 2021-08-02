@@ -1,7 +1,3 @@
-<template>
-  <Home/>
-</template>
-
 <script>
 import Home from '@/components/home/home.component.vue'
 
@@ -12,6 +8,10 @@ export default {
   }
 }
 </script>
+
+<template>
+  <Home/>
+</template>
 
 <style>
 #app {
