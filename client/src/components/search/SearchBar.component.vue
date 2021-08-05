@@ -44,6 +44,7 @@ export default {
     handleSuggestionClick(suggestion) {
       this.searchText = suggestion.name;
       this.hideSuggestions();
+      this.$router.push({ name: "CryptoPage", params: { id: suggestion.id } });
     },
   },
   mounted() {
@@ -67,8 +68,12 @@ export default {
       placeholder="Search Coins..."
     />
     <ul v-if="suggestions.length > 0 && isSuggestionsVisible">
-      <li v-for="s in suggestions" :key="s.id" @click="handleSuggestionClick(s)">
-        <router-link :to="`/crypto/${s.id}`" >{{s.name}}</router-link>
+      <li
+        v-for="s in suggestions"
+        :key="s.id"
+        @click="handleSuggestionClick(s)"
+      >
+        {{ s.name }}
       </li>
     </ul>
   </div>
@@ -120,7 +125,7 @@ li:hover {
   border-bottom-left-radius: 0;
 }
 
-a{
+a {
   color: inherit;
   text-decoration: none;
 }

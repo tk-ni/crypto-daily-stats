@@ -7,15 +7,18 @@ import NotFound404 from '@/components/404/NotFound404.component.vue';
 const routes = [
     {
         path: '/',
+        name: 'Home',
         component: Home
     },
     {
         path:'/crypto/:id',
+        name: 'CryptoPage',
         component: CryptoPage
     },
     //404
     {
         path: '/:catchAll(.*)',
+        name: '404',
         component: NotFound404
     }
 ]
