@@ -8,3 +8,12 @@ export const getAllCoins = async () => {
 
     return res.data;
 }
+
+export const getCoinById = async (id) =>{
+    let res = await axios.get(`/api/coingecko/${id}`);
+    if(res.status !== 200){
+        return false;
+    }
+
+    return res.data;
+}
