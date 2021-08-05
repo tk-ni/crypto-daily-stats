@@ -1,19 +1,24 @@
 <script>
-import Home from '@/components/home/home.component.vue'
+import Home from "@/components/home/home.component.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Home
-  }
-}
+    Home,
+  },
+};
 </script>
 
 <template>
-  <Home/>
+  <Home />
 </template>
 
 <style>
+*{
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -21,9 +26,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+
 }
 
-.vue-logo{
-  width:50px;
+.vue-logo {
+  width: 50px;
 }
 </style>

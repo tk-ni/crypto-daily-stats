@@ -1,6 +1,8 @@
 //Dependencies
 require('dotenv').config();
 const express = require('express');
+const app = express();
+
 const path = require('path');
 const favicon = require('serve-favicon');
 const cors = require('cors');
@@ -8,7 +10,6 @@ const cors = require('cors');
 //Dependencies - routes
 const coingeckoRoute = require('./routes/coingecko.route');
 
-const app = express();
 //Serve static Vue
 app.use(express.static('dist'));
 app.use(favicon(path.join(__dirname, 'dist', 'favicon.ico')));

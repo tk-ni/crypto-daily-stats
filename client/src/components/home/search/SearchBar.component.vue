@@ -5,17 +5,40 @@ export default {
   data() {
     return {
       coins: [],
+      suggestions: [],
+      searchText: "",
+      loading: true,
     };
   },
   methods: {
-    init: async () => {
+    async init() {
       let coins = await getAllCoins();
-      if (coins) {
+      if (coins.length > 0) {
         this.coins = [...coins];
+        this.loading = false;
       } else {
         this.coins = false;
+        this.loading = false;
       }
     },
+    handleSearchChange() {
+      this.suggestions = this.coins.filter((c) => {
+        let name = c.name.toLowerCase();
+        if (name.startsWith(this.searchText.toLowerCase())) {
+          return c;
+        }
+        return false;
+      });
+      if (this.searchText == "") {
+        this.suggestions = [];
+      }
+    },
+    handleSearchClick() {
+
+    },
+    handleSuggestionClick(){
+      
+    }
   },
   mounted() {
     this.init();
@@ -24,10 +47,64 @@ export default {
 </script>
 
 <template>
-  <div>Search Bar</div>
-  <!-- <div v-if="this.coins">GOTEM COINS</div>
-  <div v-else>NO COINS OH NO</div> -->
+  <div class="wrapper" v-if="!loading">
+    <input
+      v-bind:class="[suggestions.length > 0 ? 'input-with-suggestions' : '']"
+      @input="handleSearchChange(e)"
+      v-model="searchText"
+      placeholder="Search coins..."
+    />
+    <ul v-if="suggestions.length > 0">
+      <li v-for="s in suggestions" :key="s.id">
+        {{ s.name }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style scoped>
+.wrapper {
+  width: 60%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+input:focus {
+  outline: none;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+li {
+  width: 100%;
+  list-style: none;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+li:hover {
+  background-color: #ececec;
+}
+.input-with-suggestions {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
 </style>
