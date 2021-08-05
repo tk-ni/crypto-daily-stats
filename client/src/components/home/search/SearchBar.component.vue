@@ -6,6 +6,7 @@ export default {
     return {
       coins: [],
       suggestions: [],
+      isSuggestionsVisible: true,
       searchText: "",
       loading: true,
     };
@@ -33,12 +34,19 @@ export default {
         this.suggestions = [];
       }
     },
-    handleSearchClick() {
-
+    hideSuggestions() {
+      this.isSuggestionsVisible = false;
     },
-    handleSuggestionClick(){
-      
-    }
+    showSuggestions() {
+      this.isSuggestionsVisible = true;
+    },
+    handleSearchClick() {},
+    handleSuggestionClick(suggestion) {
+      console.log(suggestion)
+      this.searchText = suggestion.name;
+      //redirect to suggestion page
+      this.hideSuggestions();
+    },
   },
   mounted() {
     this.init();
@@ -49,13 +57,19 @@ export default {
 <template>
   <div class="wrapper" v-if="!loading">
     <input
-      v-bind:class="[suggestions.length > 0 ? 'input-with-suggestions' : '']"
+      v-bind:class="[
+        suggestions.length > 0 && isSuggestionsVisible
+          ? 'input-with-suggestions'
+          : '',
+      ]"
       @input="handleSearchChange(e)"
+      tabindex="0"
+      @focus="showSuggestions()"
       v-model="searchText"
-      placeholder="Search coins..."
+      placeholder="Search Coins..."
     />
-    <ul v-if="suggestions.length > 0">
-      <li v-for="s in suggestions" :key="s.id">
+    <ul v-if="suggestions.length > 0 && isSuggestionsVisible">
+      <li v-for="s in suggestions" :key="s.id" @click="handleSuggestionClick(s)">
         {{ s.name }}
       </li>
     </ul>

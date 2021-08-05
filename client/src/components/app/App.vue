@@ -14,10 +14,10 @@ export default {
 </template>
 
 <style>
-*{
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box; /* Firefox, other Gecko */
-  box-sizing: border-box; /* Opera/IE 8+ */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -26,7 +26,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-
 }
 
 .vue-logo {
