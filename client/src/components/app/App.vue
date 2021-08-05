@@ -1,12 +1,20 @@
 <script>
+import SearchBar from '@/components/search/SearchBar.component.vue';
 
 export default {
   name: "App",
+  components: {
+    SearchBar
+  }
 };
 </script>
 
 <template>
-  <router-view/>
+  <div>
+    <header>Crypto Daily Stats <img src="@/assets/logo.png" /></header>
+    <SearchBar />
+    <router-view />
+  </div>
 </template>
 
 <style>

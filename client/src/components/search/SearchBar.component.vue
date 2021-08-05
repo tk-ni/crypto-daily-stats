@@ -42,9 +42,7 @@ export default {
     },
     handleSearchClick() {},
     handleSuggestionClick(suggestion) {
-      console.log(suggestion)
       this.searchText = suggestion.name;
-      //redirect to suggestion page
       this.hideSuggestions();
     },
   },
@@ -70,7 +68,7 @@ export default {
     />
     <ul v-if="suggestions.length > 0 && isSuggestionsVisible">
       <li v-for="s in suggestions" :key="s.id" @click="handleSuggestionClick(s)">
-        {{ s.name }}
+        <router-link :to="`/crypto/${s.id}`" >{{s.name}}</router-link>
       </li>
     </ul>
   </div>
@@ -120,5 +118,10 @@ li:hover {
 .input-with-suggestions {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
 }
 </style>
