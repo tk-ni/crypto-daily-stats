@@ -1,5 +1,7 @@
 <script>
 import { getAllCoins } from "@/services/coingecko.service";
+import SearchSuggestions from "@/components/search/SearchSuggestions.component.vue";
+
 export default {
   name: "SearchBar",
   data() {
@@ -10,6 +12,9 @@ export default {
       searchText: "",
       loading: true,
     };
+  },
+  components: {
+    SearchSuggestions,
   },
   methods: {
     async init() {
@@ -40,12 +45,13 @@ export default {
     showSuggestions() {
       this.isSuggestionsVisible = true;
     },
-    handleSearchClick() {},
-    handleSuggestionClick(suggestion) {
-      this.searchText = suggestion.name;
-      this.hideSuggestions();
-      this.$router.push({ name: "CryptoPage", params: { id: suggestion.id } });
+    handleChangeSearchTextEvent(t) {
+      this.searchText=t;
     },
+    handleHideSuggestionsEvent() {
+      this.isSuggestionsVisible = false;
+    },
+    handleSearchClick() {},
   },
   mounted() {
     this.init();
@@ -67,15 +73,12 @@ export default {
       v-model="searchText"
       placeholder="Search Coins..."
     />
-    <ul v-if="suggestions.length > 0 && isSuggestionsVisible">
-      <li
-        v-for="s in suggestions"
-        :key="s.id"
-        @click="handleSuggestionClick(s)"
-      >
-        {{ s.name }}
-      </li>
-    </ul>
+    <SearchSuggestions
+      @hide-suggestions="handleHideSuggestionsEvent"
+      @change-search-text="handleChangeSearchTextEvent"
+      :suggestions="suggestions"
+      :isSuggestionsVisible="isSuggestionsVisible"
+    />
   </div>
 </template>
 
@@ -94,39 +97,5 @@ input {
   border: none;
   border-radius: 10px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
-}
-
-ul {
-  width: 100%;
-  text-align: center;
-  margin: 0 auto;
-  max-height: 600px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 0;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-li {
-  width: 100%;
-  list-style: none;
-  padding: 10px;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-li:hover {
-  background-color: #ececec;
-}
-.input-with-suggestions {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 </style>
