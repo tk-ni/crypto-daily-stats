@@ -83,11 +83,7 @@ export default {
 </template>
 
 <style scoped>
-.wrapper {
-  width: 60%;
-  max-width: 800px;
-  margin: 0 auto;
-}
+
 input:focus {
   outline: none;
 }
