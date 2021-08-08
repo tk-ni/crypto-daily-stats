@@ -49,7 +49,7 @@ export default {
 
       <div
         class="platform"
-        v-for="plat in Object.keys(coin.platforms)"
+        v-for="plat in coin.platforms"
         :key="plat"
       >
         {{ plat }}

@@ -28,8 +28,8 @@ const getCoinById = async (id, cb) => {
         let data = res.data;
         let modeledData = new Crypto({
             name: data.name,
-            platforms: data.platforms,
-            categories: data.categories,
+            platforms: new Set(data.platforms),
+            categories: new Set(data.categories),
             description: data.description.en,
             image: data.image.small,
             upvotes_24h: data.sentiment_votes_up_percentage,

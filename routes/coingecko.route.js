@@ -5,6 +5,7 @@ const coingeckoLogic = require('./../logic/coingecko.logic');
 router.get('/all', (req, res) => {
     coingeckoLogic.getAllCoins((e, coins) => {
         if (e) {
+            console.log(e);
             res.status(500).send();
         } else {
             res.status(200).send(coins);
@@ -16,6 +17,7 @@ router.get('/:id', (req, res) => {
     if (req.params.id) {
         coingeckoLogic.getCoinById(req.params.id, (e, data) => {
             if (e) {
+                console.log(e);
                 res.status(500).send();
             } else {
                 res.status(200).send(data);
